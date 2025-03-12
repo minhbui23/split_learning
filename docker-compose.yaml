@@ -1,0 +1,101 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ main port
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - rabbitmq_data:/var/lib/rabbitmq
+      - ./limits.conf:/etc/security/limits.conf
+    networks:
+      - SL-network
+
+  server:
+    image: server  # Tên image local của bạn
+    container_name: server
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./config.yaml:/app/config.yaml  # Mount file cấu hình
+      - ./server_logs:/app/logs
+    networks:
+      - SL-network
+    command: ["python", "server.py"]
+
+  client11:
+    image: client
+    container_name: client1-1
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+  client12:
+    image: client
+    container_name: client1-2
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+  client13:
+    image: client
+    container_name: client1-3
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+  client21:
+    image: client
+    container_name: client2-1
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "2", "--device", "cpu"]
+
+  client22:
+    image: client
+    container_name: client2-2
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "2", "--device", "cpu"]
+
+  client3:
+    image: client
+    container_name: client3
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["python", "client.py", "--layer_id", "3", "--device", "cpu"]
+
+volumes:
+  rabbitmq_data:
+    driver: local
+
+networks:
+  SL-network:
+    driver: bridge

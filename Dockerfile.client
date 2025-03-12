@@ -1,0 +1,22 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Copy và cài requirements
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cpu
+
+# Copy file cần thiết
+COPY client.py .
+COPY src/__init__.py src/
+COPY src/Log.py src/
+COPY src/RpcClient.py src/
+COPY src/Scheduler.py src/
+COPY src/Model.py src/
+
+# Tạo thư mục logs
+RUN mkdir -p /app/logs
+
+# Command chạy client (layer_id mặc định là 1, có thể override khi chạy)
+CMD ["python", "client.py", "--layer_id", "1", "--device", "cpu"]

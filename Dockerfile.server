@@ -16,8 +16,5 @@ COPY src/Utils.py src/
 COPY src/Validation.py src/
 
 
-# Tạo thư mục logs
-RUN mkdir -p /app/logs
-
 # Command chạy server
 CMD ["python", "server.py"]

@@ -5,19 +5,19 @@ server:
     - 10
     - 20
   clients:
-    - 1
-    - 1
+    - 3
+    - 2
     - 1
   model: VGG16
   parameters:
     load: False
-    save: False
-  validation: False
+    save: True
+  validation: True
 
 rabbit:
-  address: 192.168.101.234
-  username: dai
-  password: dai
+  address: rabbitmq
+  username: user
+  password: password
 
 log_path: .
 

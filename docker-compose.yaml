@@ -24,10 +24,11 @@ services:
       - rabbitmq
     volumes:
       - ./config.yaml:/app/config.yaml  # Mount file cấu hình
-      - ./server_logs:/app/logs
+      - ./server_result/server.log:/app/app.log
+      - ./server_result/VGG16.pth:/app/VGG16.pth
     networks:
       - SL-network
-    command: ["python", "server.py"]
+    command: ["sh", "-c", "sleep 5 && python server.py"]
 
   client11:
     image: client
@@ -38,7 +39,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 1 --device cpu"]
   client12:
     image: client
     container_name: client1-2
@@ -48,7 +49,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 1 --device cpu"]
   client13:
     image: client
     container_name: client1-3
@@ -58,7 +59,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "1", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 1 --device cpu"]
   client21:
     image: client
     container_name: client2-1
@@ -68,7 +69,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "2", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 2 --device cpu"]
 
   client22:
     image: client
@@ -79,7 +80,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "2", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 2 --device cpu"]
 
   client3:
     image: client
@@ -90,7 +91,7 @@ services:
       - ./config.yaml:/app/config.yaml  
     networks:
       - SL-network
-    command: ["python", "client.py", "--layer_id", "3", "--device", "cpu"]
+    command: ["sh", "-c", "sleep 10 && python client.py --layer_id 3 --device cpu"]
 
 volumes:
   rabbitmq_data:

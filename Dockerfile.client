@@ -15,8 +15,6 @@ COPY src/RpcClient.py src/
 COPY src/Scheduler.py src/
 COPY src/Model.py src/
 
-# Tạo thư mục logs
-RUN mkdir -p /app/logs
 
 # Command chạy client (layer_id mặc định là 1, có thể override khi chạy)
 CMD ["python", "client.py", "--layer_id", "1", "--device", "cpu"]

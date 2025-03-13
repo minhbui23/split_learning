@@ -15,9 +15,9 @@ server:
   validation: True
 
 rabbit:
-  address: rabbitmq
-  username: user
-  password: password
+  address: rabbitmq_proxy
+  username: guest
+  password: guest
 
 log_path: .
 

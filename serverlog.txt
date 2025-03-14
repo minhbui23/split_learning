@@ -1,0 +1,33 @@
+2025-03-12 16:57:15,244 - my_logger - INFO - Application start
+2025-03-12 17:02:17,726 - my_logger - INFO - Application start
+2025-03-12 17:04:57,066 - my_logger - INFO - Application start
+2025-03-13 07:23:03,339 - my_logger - INFO - Application start
+2025-03-13 07:33:17,054 - my_logger - INFO - Application start
+2025-03-13 08:27:44,574 - my_logger - INFO - Application start
+2025-03-13 08:39:16,192 - my_logger - INFO - Training Time: 591988323097 ns.
+2025-03-13 08:40:18,775 - my_logger - INFO - Test set: Average loss: -0.0423, Accuracy: 1000/10000 (10.00%)
+
+2025-03-13 08:40:49,783 - my_logger - INFO - Application start
+2025-03-13 16:41:49,169 - my_logger - INFO - Application start
+2025-03-13 16:53:48,549 - my_logger - INFO - Training Time: 615913339438 ns.
+2025-03-13 16:54:44,182 - my_logger - INFO - Test set: Average loss: -0.0715, Accuracy: 1000/10000 (10.00%)
+
+2025-03-14 07:35:06,126 - my_logger - INFO - Application start
+2025-03-14 07:37:10,355 - my_logger - INFO - Training Time: 55163271880 ns.
+2025-03-14 07:38:08,967 - my_logger - INFO - Test set: Average loss: -0.4256, Accuracy: 2081/10000 (20.81%)
+
+2025-03-14 07:49:50,820 - my_logger - INFO - Application start
+2025-03-14 07:51:53,942 - my_logger - INFO - Training Time: 54279861984 ns.
+2025-03-14 07:52:56,136 - my_logger - INFO - Test set: Average loss: -0.5085, Accuracy: 1989/10000 (19.89%)
+
+
+single rabbitmq
+2025-03-14 08:08:06,160 - my_logger - INFO - Application start
+2025-03-14 08:16:03,731 - my_logger - INFO - Training Time: 385587251478 ns.
+2025-03-14 08:17:26,531 - my_logger - INFO - Test set: Average loss: -0.0145, Accuracy: 1000/10000 (10.00%)
+
+cluster rabbitmq
+2025-03-14 08:39:51,059 - my_logger - INFO - Application start
+2025-03-14 08:48:14,317 - my_logger - INFO - Training Time: 409128919046 ns.
+2025-03-14 08:49:16,419 - my_logger - INFO - Test set: Average loss: -0.0087, Accuracy: 1000/10000 (10.00%)
+

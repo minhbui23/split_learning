@@ -19,6 +19,11 @@ services:
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
     networks:
       - SL-network
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1.5GB"
 
   rabbitmq2:
     image: rabbitmq:3-management
@@ -37,6 +42,11 @@ services:
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
     networks:
       - SL-network
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1.5GB"
 
   rabbitmq3:
     image: rabbitmq:3-management
@@ -55,6 +65,11 @@ services:
     entrypoint: /usr/local/bin/cluster-entrypoint.sh
     networks:
       - SL-network
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1.5GB"
 
   haproxy:
     image: haproxy:1.7
@@ -70,9 +85,14 @@ services:
       - 5672:5672
     networks:
       - SL-network
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512MB"
 
   server:
-    image: server  # Tên image local của bạn
+    image: minhbui1/server:v2.0.0 
     container_name: server
     depends_on:
       - haproxy    
@@ -85,8 +105,8 @@ services:
     command: ["sh", "-c", "sleep 15 && python server.py"]
 
   client11:
-    image: client
-    container_name: client1-1
+    image: minhbui1/client:v2.0.0
+    container_name: client11
     depends_on:
       - server
     volumes:
@@ -94,9 +114,15 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
   client12:
-    image: client
-    container_name: client1-2
+    image: minhbui1/client:v2.0.0
+    container_name: client12
     depends_on:
       - server
     volumes:
@@ -104,9 +130,15 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
   client13:
-    image: client
-    container_name: client1-3
+    image: minhbui1/client:v2.0.0
+    container_name: client13
     depends_on:
       - server
     volumes:
@@ -114,9 +146,15 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
   client21:
-    image: client
-    container_name: client2-1
+    image: minhbui1/client:v2.0.0
+    container_name: client21
     depends_on:
       - server
     volumes:
@@ -124,10 +162,15 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 2 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
 
   client22:
-    image: client
-    container_name: client2-2
+    image: minhbui1/client:v2.0.0
+    container_name: client22
     depends_on:
       - server
     volumes:
@@ -135,9 +178,14 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 2 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
 
   client3:
-    image: client
+    image: minhbui1/client:v2.0.0
     container_name: client3
     depends_on:
       - server
@@ -146,6 +194,11 @@ services:
     networks:
       - SL-network
     command: ["sh", "-c", "sleep 20 && python client.py --layer_id 3 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
 
 volumes:
   rabbitmq1-data:

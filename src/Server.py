@@ -80,7 +80,8 @@ class Server:
         self.control_count = config["learning"]["control-count"]
 
         log_path = config["log_path"]
-        self.label_count = [5000 // self.total_clients[0] for _ in range(num_labels)]
+        num_data_per_label = config["learning"]["num_data_per_label"]
+        self.label_count = [num_data_per_label // self.total_clients[0] for _ in range(num_labels)]
         self.time_start = None
         self.time_stop = None
 

@@ -26,3 +26,4 @@ learning:
   momentum: 0.5
   batch-size: 128
   control-count: 3
+  num_data_per_label: 500

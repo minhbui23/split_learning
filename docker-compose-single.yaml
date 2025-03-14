@@ -1,0 +1,142 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"   # RabbitMQ main port
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_logs:/var/log/rabbitmq
+      - ./rabbitmq_config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq_config/limits.conf:/etc/security/limits.conf
+    networks:
+      - SL-network
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: "2GB"
+
+  server:
+    image: minhbui1/server  
+    container_name: server
+    depends_on:
+      - rabbitmq
+    volumes:
+      - ./config.yaml:/app/config.yaml  # Mount file cấu hình
+      - ./server_result/server.log:/app/app.log
+      - ./server_result/VGG16.pth:/app/VGG16.pth
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 15 && python server.py"]
+
+
+  client11:
+    image: minhbui1/client:v2.0.0
+    container_name: client11
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+  client12:
+    image: minhbui1/client:v2.0.0
+    container_name: client12
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+  client13:
+    image: minhbui1/client:v2.0.0
+    container_name: client13
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 1 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+  client21:
+    image: minhbui1/client:v2.0.0
+    container_name: client21
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 2 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+  client22:
+    image: minhbui1/client:v2.0.0
+    container_name: client22
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 2 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+  client3:
+    image: minhbui1/client:v2.0.0
+    container_name: client3
+    depends_on:
+      - server
+    volumes:
+      - ./config.yaml:/app/config.yaml  
+    networks:
+      - SL-network
+    command: ["sh", "-c", "sleep 20 && python client.py --layer_id 3 --device cpu"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: "1GB"
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_logs:
+
+networks:
+  SL-network:
+    driver: bridge

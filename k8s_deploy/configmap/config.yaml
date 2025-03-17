@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: split-learning-config
+  namespace: split-learning
+data:
+  config.yaml: |
+    name: Split Learning
+    server:
+      num-round: 1
+      cut_layers:
+        - 10
+        - 20
+      clients:
+        - 3
+        - 2
+        - 1
+      model: VGG16
+      parameters:
+        load: False
+        save: True
+      validation: True
+
+    rabbit:
+      address: rabbitmq_proxy
+      username: guest
+      password: guest
+
+    log_path: .
+
+    learning:
+      learning-rate: 0.01
+      momentum: 0.5
+      batch-size: 128
+      control-count: 3
+      num_data_per_label: 500
+

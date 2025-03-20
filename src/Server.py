@@ -193,7 +193,7 @@ class Server:
                         src.Log.print_with_color("Training failed!", "yellow")
                     else:
                         # Save to files
-                        torch.save(state_dict_full, f'{self.model_name}.pth')
+                        torch.save(state_dict_full, f'{log_path}/{self.model_name}.pth')
                         self.round -= 1
                 else:
                     self.round -= 1

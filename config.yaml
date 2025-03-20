@@ -16,10 +16,10 @@ server:
 
 rabbit:
   address: rabbitmq_proxy
-  username: guest
-  password: guest
+  username: admin
+  password: password
 
-log_path: .
+log_path: ./result
 
 learning:
   learning-rate: 0.01

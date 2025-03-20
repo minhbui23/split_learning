@@ -14,7 +14,7 @@ data:
       clients:
         - 3
         - 2
-        - 1
+        - 2
       model: VGG16
       parameters:
         load: False
@@ -22,9 +22,9 @@ data:
       validation: True
 
     rabbit:
-      address: rabbitmq_proxy
-      username: guest
-      password: guest
+      address: rabbitmq-mainport-service
+      username: admin
+      password: password
 
     log_path: .
 
@@ -35,3 +35,9 @@ data:
       control-count: 3
       num_data_per_label: 500
 
+  limits.conf: |
+    rabbitmq soft nofile 65536
+    rabbitmq hard nofile 65536
+
+  rabbitmq.conf: |
+    max_message_size = 524288000

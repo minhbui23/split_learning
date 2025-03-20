@@ -34,12 +34,21 @@ spec:
           volumeMounts:
             - name: rabbitmq-data
               mountPath: /var/lib/rabbitmq
-            - name: rabbitmq-logs
-              mountPath: /var/log/rabbitmq
+            - name: rabbitmq-config
+              mountPath: /etc/rabbitmq/rabbitmq.conf
+              subPath: rabbitmq.conf
+            - name: limits
+              mountPath: /etc/security/limits.conf
+              subPath: limits.conf
       volumes:
         - name: rabbitmq-data
           persistentVolumeClaim:
             claimName: rabbitmq-pvc
-        - name: rabbitmq-logs
-          persistentVolumeClaim:
-            claimName: rabbitmq-pvc
+        - name: rabbitmq-config
+          configMap:
+            name: split-learning-config
+        - name: limits
+          configMap:
+            name: split-learning-config
+            
+

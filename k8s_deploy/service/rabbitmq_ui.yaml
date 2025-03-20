@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-ui-service
+  namespace: split-learning
+  labels:
+    app: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 15672      
+      targetPort: 15672 
+      nodePort: 31672

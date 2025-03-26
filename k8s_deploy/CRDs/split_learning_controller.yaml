@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: split-learning-controller
+  namespace: split-learning
+  replicas: 1
+  selector:
+    matchLabels:
+      app: split-learning-controller
+  template:
+    metadata:
+      labels:
+        app: split-learning-controller
+    spec:
+      serviceAccountName: split-learning-controller
+      containers:
+      - name: controller
+        image: split-learning-controller:latest  # Thay bằng image của bạn
+        env:
+        - name: WATCH_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace

@@ -1,0 +1,31 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: clientlayer1s.splitlearning.io
+spec:
+  group: splitlearning.io
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                nodeName:
+                  type: string
+                clientCount:
+                  type: integer
+            status:
+              type: object
+              properties:
+                activeClients:
+                  type: integer
+  scope: Namespaced
+  names:
+    plural: clientlayer1s
+    singular: clientlayer1
+    kind: ClientLayer1

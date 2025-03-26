@@ -26,7 +26,7 @@ data:
       username: admin
       password: password
 
-    log_path: .
+    log_path: /app/result
 
     learning:
       learning-rate: 0.01

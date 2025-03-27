@@ -24,6 +24,8 @@ spec:
               properties:
                 activeClients:
                   type: integer
+      subresources:
+        status: {}
   scope: Namespaced
   names:
     plural: clientlayer1s

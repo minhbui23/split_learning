@@ -1,0 +1,35 @@
+# config_controller.yaml
+kubernetes:
+  namespace: "split-learning" # Namespace controller hoạt động và watch
+  kubeconfig_path: null # Đường dẫn tới kubeconfig (null để tự động load in-cluster/default)
+
+controller:
+  layer_label_key: "splitlearning.io/layerid"
+  layer_label_value: "1"
+  node_taint:
+    key: "layer"
+    value: "1"
+    effect: "NoSchedule"
+  pod_app_label: "split-client" # Label chính cho Pods (dùng trong selector của Deployment)
+  controller_label_key: "controller"
+  controller_label_value: "split-learning-controller"
+  node_label_key: "node" # Label thêm vào Pod/Deployment để ghi dấu node
+  deployment_app_label: "split-client-deployment" # Label chính cho Deployment
+
+crd:
+  group: "splitlearning.io"
+  version: "v1"
+  plural: "clientlayer1s"
+
+pod_template:
+  configmap_name: "client-pod-template"
+  configmap_key: "template.yaml"
+  # Thông tin image có thể để trong template CM hoặc ở đây nếu muốn ghi đè
+  # default_image: "nginx:1.14.2" # Bỏ comment nếu muốn dùng giá trị này
+
+resource_requests: # Dùng cho tính toán số lượng client
+  client_cpu: "1"    # CPU core 
+  client_memory: "2" # Gi
+
+logging:
+  level: "INFO" # DEBUG, INFO, WARNING, ERROR, CRITICAL
